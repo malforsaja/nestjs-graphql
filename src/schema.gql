@@ -1,0 +1,221 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: String!
+  name: String!
+  email: String!
+  password: String!
+  role: String!
+}
+
+type Game {
+  _id: String!
+  name: String!
+  cover: String
+  description: String!
+  image: String
+  price: String
+  category: [String!]
+  releaseDate: DateTime!
+  publisher: String
+  rating: Int!
+  other: String
+  userId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type GameMessage {
+  message: String!
+}
+
+type Review {
+  _id: String!
+  title: String!
+  email: String
+  comment: String!
+  rating: String!
+  date: String!
+  gameId: String!
+  userId: String
+}
+
+type ReviewMessage {
+  message: String!
+}
+
+type LoginResponse {
+  user: User!
+  token: String!
+}
+
+type Query {
+  getHello: String!
+  users: [User!]!
+  userById(id: String!): User!
+  games: [Game!]!
+  game(id: String!): Game!
+  reviews(page: Int! = 0, limit: Int! = 10, gameId: String!): [Review!]!
+  review(id: String!): Review!
+}
+
+type Mutation {
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: String!): User!
+  createGame(createGameInput: CreateGameInput!): Game!
+  updateGame(updateGameInput: UpdateGameInput!): GameMessage!
+  removeGame(id: String!): GameMessage!
+  addReview(createReviewInput: CreateReviewInput!): Review!
+  updateReview(updateReviewInput: UpdateReviewInput!): ReviewMessage!
+  removeReview(_id: String!): ReviewMessage!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
+  signup(signupInput: CreateUserInput!): User!
+}
+
+input UpdateUserInput {
+  """name of user"""
+  name: String
+
+  """email of user"""
+  email: String
+
+  """password of user"""
+  password: String
+
+  """role of user"""
+  role: String
+  _id: String!
+}
+
+input CreateGameInput {
+  """name of game"""
+  name: String!
+
+  """description of game"""
+  description: String!
+
+  """image of game"""
+  image: String
+
+  """price of game"""
+  price: Float
+
+  """category of game"""
+  category: [String!]
+
+  """release date of game"""
+  releaseDate: String!
+
+  """publisher of game"""
+  publisher: String
+
+  """rating of game"""
+  rating: Int!
+
+  """other of game"""
+  other: String
+
+  """user of review if user is logged in"""
+  userId: String
+}
+
+input UpdateGameInput {
+  """name of game"""
+  name: String
+  description: String
+
+  """image of game"""
+  image: String
+
+  """price of game"""
+  price: Float
+
+  """category of game"""
+  category: [String!]
+
+  """release date of game"""
+  releaseDate: String
+
+  """publisher of game"""
+  publisher: String
+
+  """rating of game"""
+  rating: Int
+
+  """other of game"""
+  other: String
+
+  """user of review if user is logged in"""
+  userId: String
+  _id: String!
+  title: String
+}
+
+input CreateReviewInput {
+  """title of review"""
+  title: String!
+
+  """email of user if its not logged in"""
+  email: String
+
+  """comment of review"""
+  comment: String!
+
+  """rating of review"""
+  rating: Int!
+
+  """date of review"""
+  date: DateTime
+
+  """game of review"""
+  gameId: String!
+
+  """user of review if user is logged in"""
+  userId: String
+}
+
+input UpdateReviewInput {
+  title: String
+
+  """email of user if its not logged in"""
+  email: String
+  comment: String
+  rating: Float
+
+  """date of review"""
+  date: DateTime
+
+  """game of review"""
+  gameId: String
+
+  """user of review if user is logged in"""
+  userId: String
+  _id: String
+}
+
+input LoginUserInput {
+  """email of user"""
+  email: String!
+
+  """password of user"""
+  password: String!
+}
+
+input CreateUserInput {
+  """name of user"""
+  name: String!
+
+  """email of user"""
+  email: String!
+
+  """password of user"""
+  password: String!
+
+  """role of user"""
+  role: String
+}
